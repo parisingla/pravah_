@@ -1,0 +1,122 @@
+{
+  "clearance": {
+    "model": "clearance",
+    "trained_at": "2026-06-19T16:07:39.787777+00:00",
+    "target": "duration_min",
+    "filter": {
+      "min": 1.0,
+      "max": 2880.0
+    },
+    "split": {
+      "type": "time-based",
+      "test_fraction": 0.2
+    },
+    "n_train": 2034,
+    "n_test": 509,
+    "features": {
+      "categorical": [
+        "cause_norm",
+        "veh_type",
+        "corridor",
+        "zone",
+        "event_type"
+      ],
+      "numeric": [
+        "requires_road_closure",
+        "hour_ist",
+        "dow",
+        "is_weekend",
+        "is_night",
+        "is_rush"
+      ]
+    },
+    "metrics": {
+      "p50_mae": 176.127,
+      "p50_rmse": 444.573,
+      "pinball_p10": 18.959,
+      "pinball_p50": 88.064,
+      "pinball_p90": 72.932,
+      "p90_coverage": 0.9,
+      "median_baseline_mae": 166.393
+    },
+    "artifacts": {
+      "p10": "clearance/p10.cbm",
+      "p50": "clearance/p50.cbm",
+      "p90": "clearance/p90.cbm"
+    }
+  },
+  "triage": {
+    "model": "triage",
+    "trained_at": "2026-06-19T17:00:42.218926+00:00",
+    "embedder": "sentence-transformers/LaBSE",
+    "embedding_dim": 768,
+    "head_estimator": "SoftVote(LGBM+LogReg, 0.5/0.5, class_weight=balanced)",
+    "heads": {
+      "cause": "multiclass",
+      "priority": "binary"
+    },
+    "n_classes": 16,
+    "n_train": 5448,
+    "split": {
+      "type": "stratified",
+      "test_fraction": 0.2
+    },
+    "classes": [
+      "accident",
+      "congestion",
+      "construction",
+      "debris",
+      "fog / low visibility",
+      "others",
+      "pot_holes",
+      "procession",
+      "protest",
+      "public_event",
+      "road_conditions",
+      "test_demo",
+      "tree_fall",
+      "vehicle_breakdown",
+      "vip_movement",
+      "water_logging"
+    ],
+    "metrics": {
+      "cause_macro_f1": 0.4942,
+      "cause_accuracy": 0.7417,
+      "priority_macro_f1": 0.6734,
+      "priority_accuracy": 0.6948,
+      "test_n": 1363,
+      "indic_test_n": 181,
+      "cause_macro_f1_indic": 0.4361,
+      "priority_macro_f1_indic": 0.6471
+    },
+    "artifacts": {
+      "cause_head": "triage/cause_head.joblib",
+      "priority_head": "triage/priority_head.joblib",
+      "label_encoders": "triage/label_encoders.joblib"
+    }
+  },
+  "foresee": {
+    "model": "foresee",
+    "trained_at": "2026-06-19T16:50:51.855458+00:00",
+    "estimator": "HistGradientBoostingRegressor(loss=poisson)",
+    "target": "incident_count_per_cell",
+    "split": {
+      "type": "time-based",
+      "test_fraction": 0.2
+    },
+    "n_corridors": 21,
+    "n_train_cells": 1534,
+    "metrics": {
+      "precision_at_10": 0.9,
+      "precision_at_20": 0.8,
+      "precision_at_50": 0.76,
+      "test_cells": 646
+    },
+    "artifacts": {
+      "forecaster": "foresee/forecaster.joblib",
+      "corridor_encoder": "foresee/corridor_encoder.json",
+      "centroids": "foresee/centroids.json"
+    }
+  },
+  "trained_at": "2026-06-18T20:05:09.125533+00:00"
+}

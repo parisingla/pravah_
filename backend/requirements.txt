@@ -1,0 +1,22 @@
+# PRAVAH backend — full stack used across all 5 parts (CPU-only, localhost, no Docker)
+fastapi
+uvicorn[standard]
+pydantic-settings
+SQLAlchemy
+alembic
+psycopg[binary]  # Postgres driver (Supabase) — psycopg v3
+pandas
+numpy
+pyarrow
+catboost
+scikit-learn
+lightgbm
+sentence-transformers
+rapidfuzz
+shap
+networkx
+ortools
+apscheduler
+python-jose[cryptography]
+python-dotenv
+pytest

@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# Env
+.env
+
+# SQLite DB
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# CatBoost training logs (regenerated on every train)
+catboost_info/
+
+# Data artifacts (keep dir structure via .gitkeep, ignore contents)
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Trained model artifacts
+models/clearance/*
+!models/clearance/.gitkeep
+models/triage/*
+!models/triage/.gitkeep
+models/foresee/*
+!models/foresee/.gitkeep
